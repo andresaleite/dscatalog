@@ -24,4 +24,10 @@ public class CategoryResouce {
 		List<Category> list = service.findAll();
 		return ResponseEntity.ok().body(list);
 	}
+	/*
+	@GetMapping
+	public ResponseEntity<Category> findById(Long id) {
+		Category category = service.findById(id);
+		return ResponseEntity.ok().body(category);
+	}*/
 }
