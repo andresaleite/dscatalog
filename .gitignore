@@ -1,0 +1,8 @@
+*.class
+*.log
+*.jar
+*.war
+*.rar
+.settings
+.vscode
+.metadata
