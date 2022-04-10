@@ -1,5 +1,6 @@
 package com.devsuperior.dscatalog.repositories;
 
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Assertions;
@@ -51,14 +52,25 @@ public class ProductRepositoryTests {
 	
 	@Test
 	public void deleteSholdThrowEmptyResultDataAccessExceptionWhenIdDoesNotExist() {
-		
 		Assertions.assertThrows(EmptyResultDataAccessException.class, () -> {
 			repository.deleteById(nonExistingId);
 		});
-		
+	}
+	
+	@Test
+	public void findByIdSholdReturnOptionalProductNotNullWhenIdExist() {
+		Optional<Product> result = repository.findById(existingId);
+		Assertions.assertNotNull(result.get());
 	}
 
-
+	@Test
+	public void findByIdSholdreturnOptionalProductNullWhenIdNotExist() {
+		Optional<Product> result = repository.findById(nonExistingId);
+		Assertions.assertThrows(NoSuchElementException.class, () -> {
+			result.get();
+		});
+	}
+	
 
 	
 }
