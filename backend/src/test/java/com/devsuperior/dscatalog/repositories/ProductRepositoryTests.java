@@ -58,14 +58,16 @@ public class ProductRepositoryTests {
 	}
 	
 	@Test
-	public void findByIdSholdReturnOptionalProductNotNullWhenIdExist() {
+	public void findByIdSholdReturnNonEmptyOptionalProductWhenIdExist() {
 		Optional<Product> result = repository.findById(existingId);
+		Assertions.assertTrue(result.isPresent());
 		Assertions.assertNotNull(result.get());
 	}
 
 	@Test
-	public void findByIdSholdreturnOptionalProductNullWhenIdNotExist() {
+	public void findByIdSholdReturnEmptyOptionalProductWhenIdNotExist() {
 		Optional<Product> result = repository.findById(nonExistingId);
+		Assertions.assertTrue(result.isEmpty());
 		Assertions.assertThrows(NoSuchElementException.class, () -> {
 			result.get();
 		});
