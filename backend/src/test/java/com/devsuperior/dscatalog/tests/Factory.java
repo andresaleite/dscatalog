@@ -9,13 +9,21 @@ import com.devsuperior.dscatalog.entities.Product;
 public class Factory {
 
 	
-	public static Product createProduct() {
-		Product product = new Product( 1L, "Phone", 800.0, "Good Phone", "https://img.com/img.png", Instant.parse("2022-10-20T03:00:00Z"));
-		product.getCategories().add(new Category(2L, "Electronics"));
+	public static Product createProduct(long id) {
+		Product product = new Product( id, "Phone", 800.0, "Good Phone", "https://img.com/img.png", Instant.parse("2022-10-20T03:00:00Z"));
+		product.getCategories().add(createCategory(id));
 		return product;
 	}
-
+	
+	public static ProductDTO createProductDTO(long id) {
+		return new ProductDTO(createProduct(id), createProduct(id).getCategories());
+	}
+	
 	public static ProductDTO createProductDTO() {
-		return new ProductDTO(createProduct(), createProduct().getCategories());
+		return new ProductDTO();
+	}
+
+	public static Category createCategory(long id) {
+		return new Category(id, "Electronics");
 	}
 }

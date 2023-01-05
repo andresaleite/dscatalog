@@ -45,7 +45,7 @@ public class ProductService {
 	public ProductDTO findById(Long id) {
 		Product entity = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Categoria não encontrada."));
 		
-		return  new ProductDTO(entity, entity.getCategories());
+		return new ProductDTO(entity, entity.getCategories());
 	}
 
 	@Transactional
@@ -64,6 +64,8 @@ public class ProductService {
 			entity = repository.save(entity);
 			return new ProductDTO(entity, entity.getCategories());
 		}catch(EntityNotFoundException e) {
+			throw new ResourceNotFoundException("Id not found: "+id);
+		}catch(ResourceNotFoundException e) {
 			throw new ResourceNotFoundException("Id not found: "+id);
 		}
 	}
