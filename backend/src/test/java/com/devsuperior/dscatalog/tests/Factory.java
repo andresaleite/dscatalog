@@ -7,19 +7,15 @@ import com.devsuperior.dscatalog.entities.Category;
 import com.devsuperior.dscatalog.entities.Product;
 
 public class Factory {
-
 	
-	public static Product createProduct(long id) {
-		Product product = new Product( id, "Phone", 800.0, "Good Phone", "https://img.com/img.png", Instant.parse("2022-10-20T03:00:00Z"));
-		product.getCategories().add(createCategory(id));
-		return product;
+	public static Product createProduct() {
+		Product product = new Product(1L, "Phone", "Good Phone", 800.0, "https://img.com/img.png", Instant.parse("2020-10-20T03:00:00Z"));
+		product.getCategories().add(new Category(1L, "Electronics"));
+		return product;		
 	}
 	
-	public static ProductDTO createProductDTO(long id) {
-		return new ProductDTO(createProduct(id), createProduct(id).getCategories());
-	}
-	
-	public static Category createCategory(long id) {
-		return new Category(id, "Electronics");
+	public static ProductDTO createProductDTO() {
+		Product product = createProduct();
+		return new ProductDTO(product, product.getCategories());
 	}
 }
